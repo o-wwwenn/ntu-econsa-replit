@@ -4,6 +4,8 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 export default defineConfig({
+  // 核心修正 1：加上 base 路徑，這樣 GitHub 才能正確找到你的圖片和腳本
+  base: process.env.NODE_ENV === "production" ? "/ntu-econsa-replit/" : "/",
   plugins: [
     react(),
     runtimeErrorOverlay(),
@@ -28,13 +30,8 @@ export default defineConfig({
   },
   root: path.resolve(import.meta.dirname, "client"),
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
+    // 核心修正 2：將輸出路徑改為 /dist，跟你的 deploy.yml 劇本對齊
+    outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
-  },
-  server: {
-    fs: {
-      strict: true,
-      deny: ["**/.*"],
-    },
   },
 });
