@@ -28,10 +28,11 @@ export default defineConfig({
       "@assets": path.resolve(import.meta.dirname, "attached_assets"),
     },
   },
+  // ... 前面的 plugins 和 resolve 保持不變
   root: path.resolve(import.meta.dirname, "client"),
   build: {
-    // 核心修正 2：將輸出路徑改為 /dist，跟你的 deploy.yml 劇本對齊
-    outDir: path.resolve(import.meta.dirname, "dist"),
+    // 建議改為相對路徑，確保它會產出在專案根目錄的 dist 資料夾
+    outDir: "../dist", 
     emptyOutDir: true,
   },
 });
